@@ -60,11 +60,6 @@ body {
   flex-direction: column;
 }
 
-.layout {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-}
 
 .main-content {
   flex: 1;

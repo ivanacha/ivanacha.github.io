@@ -9,7 +9,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="layout">
+    <>
       <Sidebar />
       <div className="main-content">
         <section id="center">
@@ -102,7 +102,7 @@ function App() {
         <div className="ticks"></div>
         <section id="spacer"></section>
       </div>
-    </div>
+    </>
   )
 }
 

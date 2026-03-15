@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './Sidebar.css'
 
 const navItems = [
@@ -46,17 +47,31 @@ const navItems = [
 ]
 
 function Sidebar() {
+  const [expanded, setExpanded] = useState(false)
+
   return (
-    <nav className="sidebar">
-      <div className="sidebar-nav">
-        {navItems.map((item) => (
-          <a key={item.label} href={item.href} className="sidebar-item">
-            <span className="sidebar-icon">{item.icon}</span>
-            <span className="sidebar-label">{item.label}</span>
-          </a>
-        ))}
-      </div>
-    </nav>
+    <>
+      <button
+        className={`sidebar-toggle${expanded ? ' sidebar-toggle--open' : ''}`}
+        onClick={() => setExpanded((e) => !e)}
+        aria-label={expanded ? 'Collapse sidebar' : 'Expand sidebar'}
+      >
+        <span className="bar bar-top" />
+        <span className="bar bar-mid" />
+        <span className="bar bar-bot" />
+      </button>
+
+      <nav className={`sidebar${expanded ? ' sidebar--expanded' : ''}`}>
+        <div className="sidebar-nav">
+          {navItems.map((item) => (
+            <a key={item.label} href={item.href} className="sidebar-item">
+              <span className="sidebar-icon">{item.icon}</span>
+              <span className="sidebar-label">{item.label}</span>
+            </a>
+          ))}
+        </div>
+      </nav>
+    </>
   )
 }
 

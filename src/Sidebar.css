@@ -1,29 +1,98 @@
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  width: 60px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border);
+/* ── Toggle button (always visible) ── */
+.sidebar-toggle {
+  all: unset;
+  cursor: pointer;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
   display: flex;
   flex-direction: column;
-  padding: 24px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.sidebar-toggle:hover {
+  background: var(--social-bg);
+}
+
+.bar {
+  display: block;
+  width: 18px;
+  height: 1.7px;
+  background: var(--text);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.25s ease, opacity 0.2s ease, background 0.2s;
+}
+
+.sidebar-toggle:hover .bar {
+  background: var(--text-h);
+}
+
+.sidebar-toggle--open .bar-top {
+  transform: translateY(6.7px) rotate(45deg);
+}
+
+.sidebar-toggle--open .bar-mid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.sidebar-toggle--open .bar-bot {
+  transform: translateY(-6.7px) rotate(-45deg);
+}
+
+/* ── Sidebar panel ── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 0;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0 16px;
   box-sizing: border-box;
   overflow: hidden;
-  transition: width 0.25s ease;
-  background: var(--bg);
-  z-index: 10;
+  transition: width 0.25s ease, border-color 0.25s ease;
+  z-index: 100;
 }
 
-.sidebar:hover {
-  width: 180px;
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    background: rgba(22, 23, 29, 0.75);
+  }
 }
 
+.sidebar--expanded {
+  width: 200px;
+  border-right: 1px solid var(--border);
+}
+
+/* ── Nav items ── */
 .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 4px;
   flex: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.sidebar--expanded .sidebar-nav {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sidebar-item {
@@ -60,10 +129,4 @@
 
 .sidebar-label {
   font-size: 15px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-.sidebar:hover .sidebar-label {
-  opacity: 1;
 }
