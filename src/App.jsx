@@ -10,7 +10,6 @@ function App() {
         <header className="profile-header">
           <div className="profile-avatar">
             <img src={heroImg} alt="Profile" />
-            <span className="availability-dot" />
           </div>
           <span className="profile-name">Ivan Acha</span>
           <span className="profile-sep">💻</span>
@@ -23,7 +22,6 @@ function App() {
             I'm here <mark className="hero-mark">to code.</mark>
           </h1>
           <div className="availability-status">
-            <span className="status-line" />
             <span>Currently available for Software Engineer and freelance opportunities.</span>
           </div>
         </section>

@@ -17,8 +17,10 @@
   transition: background 0.2s;
 }
 
-.sidebar-toggle:hover {
-  background: var(--social-bg);
+@media (hover: hover) and (pointer: fine) {
+  .sidebar-toggle:hover {
+    background: var(--social-bg);
+  }
 }
 
 /* Closed state: varying-width lines */
@@ -49,6 +51,14 @@
 @media (hover: hover) and (pointer: fine) {
   .sidebar-toggle {
     display: none;
+  }
+}
+
+/* Move toggle to right side on mobile */
+@media (hover: none), (pointer: coarse) {
+  .sidebar-toggle {
+    left: unset;
+    right: 16px;
   }
 }
 
@@ -97,11 +107,12 @@
 @media (hover: none), (pointer: coarse) {
   .sidebar {
     top: 0;
-    left: 0;
+    left: unset;
+    right: 0;
     height: 100vh;
-    border-radius: 0 16px 16px 0;
-    border-left: none;
-    width: 56px;
+    border-radius: 16px 0 0 16px;
+    border-right: none;
+    width: 0;
   }
 
   .sidebar--expanded {

@@ -3,6 +3,11 @@
   align-items: center;
   gap: 12px;
   padding: 24px 32px;
+
+  @media (hover: none), (pointer: coarse) {
+    padding: 24px 16px;
+    flex-wrap: wrap;
+  }
 }
 
 .profile-avatar {
@@ -10,6 +15,10 @@
   width: 48px;
   height: 48px;
   flex-shrink: 0;
+
+  @media (hover: none), (pointer: coarse) {
+    flex: 0 0 100%;
+  }
 }
 
 .profile-avatar img {
@@ -18,17 +27,6 @@
   border-radius: 50%;
   object-fit: cover;
   display: block;
-}
-
-.availability-dot {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #a8e63d;
-  border: 2px solid var(--bg);
 }
 
 .profile-name {
@@ -53,6 +51,10 @@
   justify-content: center;
   flex-grow: 1;
   padding: 0 32px 64px;
+
+  @media (hover: none), (pointer: coarse) {
+    padding: 0 16px 48px;
+  }
 }
 
 .hero-headline {

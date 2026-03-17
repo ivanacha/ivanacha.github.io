@@ -68,6 +68,10 @@ body {
   text-align: left;
   min-width: 0;
   margin-left: 80px;
+
+  @media (hover: none), (pointer: coarse) {
+    margin-left: 0;
+  }
 }
 
 h1,
