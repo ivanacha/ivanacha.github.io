@@ -17,12 +17,14 @@ function App() {
         </header>
 
         <section className="hero-section">
-          <h1 className="hero-headline">
-            Building robust<br />solutions?<br />
-            I'm here <mark className="hero-mark">to code.</mark>
-          </h1>
-          <div className="availability-status">
-            <span>Currently available for Software Engineer and freelance opportunities.</span>
+          <div className="hero-content">
+            <h1 className="hero-headline">
+              Building robust<br />solutions?<br />
+              I'm here <mark className="hero-mark">to code.</mark>
+            </h1>
+            <div className="availability-status">
+              <span>Currently available for Software Engineer and freelance opportunities.</span>
+            </div>
           </div>
         </section>
       </div>
