@@ -1,8 +1,74 @@
+import { useEffect, useRef } from 'react'
 import heroImg from './assets/headshot_small.jpg'
 import Sidebar from './Sidebar'
 import './App.css'
 
-function App() {
+const skills = [
+  {
+    color: 'var(--accent)',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+      </svg>
+    ),
+    title: 'Software Engineering',
+    desc: 'Building robust backend systems, APIs, and infrastructure. Proficient in Python, Java, and distributed system design.',
+  },
+  {
+    color: 'rgb(34, 197, 94)',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    title: 'Frontend Development',
+    desc: 'Crafting responsive, accessible UIs with React, TypeScript, and modern CSS. Focused on performance and clean design.',
+  },
+  {
+    color: 'rgb(249, 115, 22)',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2" />
+        <circle cx="12" cy="17" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+    title: 'iOS Development',
+    desc: 'Developing native iOS applications with Swift and SwiftUI. Building intuitive mobile experiences for Apple platforms.',
+  },
+]
+
+export default function App() {
+  const skillsRef = useRef(null)
+  const scrollHintRef = useRef(null)
+
+  useEffect(() => {
+    const el = scrollHintRef.current
+    if (!el) return
+    const onScroll = () => {
+      el.classList.toggle('is-hidden', window.scrollY > 80)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const section = skillsRef.current
+    if (!section) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          section.classList.add('is-visible')
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <Sidebar />
@@ -10,7 +76,7 @@ function App() {
         <section className="hero-section">
           <div className="hero-left">
             <h1 className="hero-headline">
-              Hi, I'm <mark className="hero-mark">Ivan.</mark>
+              Hi, I'm <mark className="hero-mark">Ivan!</mark>
             </h1>
             <p className="hero-bio">
               I'm a software developer focused on building robust, scalable systems
@@ -40,10 +106,36 @@ function App() {
           <div className="hero-right">
             <img src={heroImg} alt="Ivan Acha" className="hero-photo" />
           </div>
+
+          <button
+            className="scroll-hint"
+            ref={scrollHintRef}
+            aria-label="Scroll to expertise"
+            onClick={() => skillsRef.current?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </section>
+
+        <section className="skills-section" ref={skillsRef}>
+          <h2 className="skills-title">My Expertise</h2>
+          <div className="skills-grid">
+            {skills.map((skill) => (
+              <div key={skill.title} className="skill-card">
+                <div className="skill-icon" style={{ color: skill.color }}>
+                  {skill.icon}
+                </div>
+                <h3 className="skill-name" style={{ '--skill-color': skill.color }}>
+                  {skill.title}
+                </h3>
+                <p className="skill-desc">{skill.desc}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </>
   )
 }
-
-export default App
